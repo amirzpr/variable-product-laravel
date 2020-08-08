@@ -9,5 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 */
 class AttributeType extends Model
 {
-    //
+    protected $guarded = [];
+
+    public function attributes()
+    {
+        return $this->hasMany(Attribute::class);
+    }
 }

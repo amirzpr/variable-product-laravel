@@ -2,6 +2,7 @@
 
 namespace App\Models\Product\Attribute;
 
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,5 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 */
 class AttributeItem extends Model
 {
-    //
+    protected $guarded = [];
+
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_attributes');
+    }
 }
