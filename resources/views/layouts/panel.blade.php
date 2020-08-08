@@ -6,6 +6,7 @@
   <title>پنل ادمین</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v[X.Y.Z]/dist/font-face.css" rel="stylesheet" type="text/css" />
   <link href="{!! asset('css/panel.css') !!}" rel="stylesheet">
 </head>
 <body>
@@ -30,7 +31,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{!! route('panel.categories') !!}">
+            <a class="nav-link" href="{!! route('categories.index') !!}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                    class="feather feather-file">
