@@ -17,8 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_id')->default(0);
             $table->string('title');
-            $table->string('slug');
-            $table->boolean('is_active');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
