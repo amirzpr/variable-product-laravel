@@ -18,14 +18,14 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $validatedCategory = $request->validate([
+        $validated = $request->validate([
             'title' => ['required', 'string', 'between:2,255', 'unique:categories'],
             'slug' => ['required', 'string', 'between:2,255', 'regex:/^[a-z0-9\-]+$/', 'unique:categories'],
             'parent_id' => ['required', 'exclude_if:parent_id,0', 'exists:categories,id'],
         ]);
 
-        Category::create($validatedCategory);
+        Category::create($validated);
 
-        return back();
+        return back()->with('status', 'دسته بندی «'. $validated['title'] .'» با موفقیت ایجاد شد.');
     }
 }

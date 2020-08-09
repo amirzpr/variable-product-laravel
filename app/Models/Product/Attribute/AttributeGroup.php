@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class AttributeGroup extends Model
 {
     protected $guarded = [];
+    public $timestamps = false;
 
     public function category()
     {

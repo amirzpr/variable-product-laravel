@@ -4,16 +4,16 @@
   @include('partials._success_status')
   <div class="row justify-content-around">
     <div class="col-md-3">
-      <h5>افزودن دسته بندی جدید</h5>
+      <h5>افزودن گروه مشخصات</h5>
     </div>
     <div class="col-md-8">
-      <h5>فهرست دسته بندی ها</h5>
+      <h5>فهرست گروه مشخصات</h5>
     </div>
   </div>
   <hr class="mt-1">
   <div class="row justify-content-around">
     <div class="col-md-3 p-3 rounded" style="background-color: #eee">
-      <form action="{!! route('categories.store') !!}" method="post">
+      <form action="{!! route('attr-groups.store') !!}" method="post">
         @csrf
 
         <div class="form-group">
@@ -24,24 +24,14 @@
         </div>
 
         <div class="form-group">
-          <label for="slug">عنوان مناسب url</label>
-          <input type="text" class="form-control ltr" id="slug" name="slug" placeholder="عنوان مناسب url"
-                 value="{{ old('slug') }}">
-          <small id="slugHelp" class="text-muted">
-            باید فقط شامل حروف کوچک انگلیسی، اعداد و خط فاصله (-) باشد.
-          </small>
-          @include('partials._error_message', ['field' => 'slug'])
-        </div>
-
-        <div class="form-group">
-          <label for="parent">دسته بندی مادر</label>
-          <select class="custom-select" id="parent" name="parent_id">
-            <option value="0">بدون دسته بندی مادر</option>
+          <label for="category">دسته بندی</label>
+          <select class="custom-select" id="category" name="category_id">
+            <option selected disabled>انتخاب کنید...</option>
             @foreach($categories as $category)
               <option value="{{ $category->id }}">{{ $category->title }}</option>
             @endforeach
           </select>
-          @include('partials._error_message', ['field' => 'parent_id'])
+          @include('partials._error_message', ['field' => 'root_category'])
         </div>
 
         <div class="form-group text-left">
@@ -56,17 +46,15 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">عنوان</th>
-          <th scope="col">عنوان مناسب url</th>
-          <th scope="col">دسته بندی مادر</th>
+          <th scope="col">دسته بندی</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($categories as $category)
+        @foreach($attrGroups as $group)
           <tr>
-            <th scope="row">{{ $category->id }}</th>
-            <td>{{ $category->title }}</td>
-            <td>{{ $category->slug }}</td>
-            <td>{{ $category->parent->title ?? 'ندارد' }}</td>
+            <th scope="row">{{ $group->id }}</th>
+            <td>{{ $group->title }}</td>
+            <td>{{ $group->category->title }}</td>
           </tr>
         @endforeach
         </tbody>

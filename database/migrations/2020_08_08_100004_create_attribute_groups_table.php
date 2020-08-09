@@ -16,8 +16,9 @@ class CreateAttributeGroupsTable extends Migration
         Schema::create('attribute_groups', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->unique();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+
+            $table->unique(['title', 'category_id']);
         });
     }
 
