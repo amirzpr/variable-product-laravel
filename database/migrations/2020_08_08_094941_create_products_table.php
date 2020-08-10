@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->unsignedBigInteger('price');
             $table->foreignId('root_category_id')->constrained('categories');
             $table->timestamps();
         });

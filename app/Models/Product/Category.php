@@ -13,6 +13,21 @@ class Category extends Model
 {
     protected $guarded = [];
 
+    /**
+     * Return Products that this category is their root category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rootProducts()
+    {
+        return $this->hasMany(Product::class, 'root_category_id');
+    }
+
+    /**
+     * Return Products that this category is one of their chosen categories
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function products()
     {
         return $this->belongsToMany(Product::class);
