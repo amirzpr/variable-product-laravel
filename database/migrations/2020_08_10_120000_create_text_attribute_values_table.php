@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductAttributesTable extends Migration
+class CreateTextAttributeValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProductAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_attributes', function (Blueprint $table) {
-            $table->foreignId('attribute_item_id')->constrained()->cascadeOnDelete();
+        Schema::create('text_attribute_values', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-
-            $table->primary(['attribute_item_id', 'product_id']);
+            $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
+            $table->text('value');
         });
     }
 

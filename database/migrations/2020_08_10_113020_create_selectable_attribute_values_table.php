@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeTypesTable extends Migration
+class CreateSelectableAttributeValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAttributeTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_types', function (Blueprint $table) {
+        Schema::create('selectable_attribute_values', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('class');
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('value')->constrained('selectable_attribute_options')->cascadeOnDelete();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateAttributeTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_types');
+        Schema::dropIfExists('attribute_product');
     }
 }

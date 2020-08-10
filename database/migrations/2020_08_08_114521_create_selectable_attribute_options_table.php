@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeItemsTable extends Migration
+class CreateSelectableAttributeOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateAttributeItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_items', function (Blueprint $table) {
+        Schema::create('selectable_attribute_options', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('value');
             $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
         });
     }

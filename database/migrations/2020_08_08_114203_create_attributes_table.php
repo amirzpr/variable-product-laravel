@@ -16,8 +16,8 @@ class CreateAttributesTable extends Migration
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('attribute_type_id')->constrained();
             $table->foreignId('attribute_group_id')->constrained();
+            $table->unsignedBigInteger('attribute_type_id');
         });
     }
 
