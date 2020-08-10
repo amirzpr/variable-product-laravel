@@ -31,7 +31,7 @@
               <option value="{{ $category->id }}">{{ $category->title }}</option>
             @endforeach
           </select>
-          @include('partials._error_message', ['field' => 'root_category'])
+          @include('partials._error_message', ['field' => 'category_id'])
         </div>
 
         <div class="form-group text-left">

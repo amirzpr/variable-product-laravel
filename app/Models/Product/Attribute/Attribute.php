@@ -2,6 +2,7 @@
 
 namespace App\Models\Product\Attribute;
 
+use App\Models\Product\Category;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model
 {
     protected $guarded = [];
+    public $timestamps = false;
 
     public function attributeGroup()
     {
@@ -21,8 +23,23 @@ class Attribute extends Model
         return $this->belongsTo(AttributeType::class);
     }
 
-    public function attributeItems()
+    public function attributeOptions()
     {
-        return $this->hasMany(AttributeItem::class);
+        return $this->hasMany(SelectableAttributeOption::class);
+    }
+
+
+    /**
+     * Create Attribute options from a simple array and attach them to the attribute
+     *
+     * @param array $options_array an array that contains option values
+     */
+    public function attachOptions($options_array)
+    {
+        $options = array_map( function ($option) {
+            return SelectableAttributeOption::make(['value' => trim($option)]);
+        }, $options_array);
+
+        $this->attributeOptions()->saveMany($options);
     }
 }

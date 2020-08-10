@@ -8,17 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
 * @mixin \Eloquent
 */
-class AttributeItem extends Model
+class SelectableAttributeOption extends Model
 {
     protected $guarded = [];
+    public $timestamps = false;
 
     public function attribute()
     {
         return $this->belongsTo(Attribute::class);
-    }
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'product_attributes');
     }
 }
