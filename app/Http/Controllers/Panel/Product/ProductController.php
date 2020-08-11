@@ -17,9 +17,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit(Product $product)
     {
-        return view('panel.products.edit');
+        return view('panel.products.edit', [
+            'product' => $product,
+            'attrGroups' => $product->rootCategory->allAttributeGroups,
+        ]);
     }
 
     public function store(StoreProduct $request)
@@ -33,6 +36,7 @@ class ProductController extends Controller
 
         $product->categories()->sync($categories);
 
-        return back()->with('status', 'محصول «'. $validated['title'] .'» با موفقیت ایجاد شد.');
+        return redirect()->route('products.edit', $product)
+            ->with('status', "محصول « {$validated['title']} » با موفقیت ایجاد شد. اکنون می‌توانید ویژگی‌های محصول را اضافه کنید.");
     }
 }

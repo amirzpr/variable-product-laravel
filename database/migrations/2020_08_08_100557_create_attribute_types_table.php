@@ -17,6 +17,7 @@ class CreateAttributeTypesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('class');
+            $table->string('partial_panel');
         });
     }
 

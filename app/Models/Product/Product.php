@@ -6,6 +6,7 @@ use App\Models\Product\Attribute\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property Category rootCategory
 * @mixin \Eloquent
 */
 class Product extends Model
@@ -20,10 +21,5 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
-    }
-
-    public function attributeItems()
-    {
-        return $this->belongsToMany(Attribute::class, 'product_attributes');
     }
 }

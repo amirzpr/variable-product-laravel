@@ -14,10 +14,26 @@ class AttributeTypeSeeder extends Seeder
     public function run()
     {
         $types = [
-            ['title' => 'چک باکس', 'class' => Type\Boolean::class],
-            ['title' => 'متن', 'class' => Type\Text::class],
-            ['title' => 'انتخاب تکی', 'class' => Type\Selectable::class],
-            ['title' => 'انتخاب چندتایی', 'class' => Type\MultiSelectable::class],
+            [
+            'title' => 'چک باکس',
+            'class' => Type\Boolean::class,
+            'partial_panel' => 'partials.attr_type._boolean',
+            ],
+            [
+            'title' => 'متن',
+            'class' => Type\Text::class,
+            'partial_panel' => 'partials.attr_type._text',
+            ],
+            [
+            'title' => 'انتخاب تکی',
+            'class' => Type\Selectable::class,
+            'partial_panel' => 'partials.attr_type._selectable',
+            ],
+            [
+            'title' => 'انتخاب چندتایی',
+            'class' => Type\MultiSelectable::class,
+            'partial_panel' => 'partials.attr_type._multi_selectable',
+            ],
         ];
 
         AttributeType::insert($types);

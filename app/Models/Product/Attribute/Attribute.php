@@ -2,6 +2,7 @@
 
 namespace App\Models\Product\Attribute;
 
+use App\Contracts\AttributeTypeInterface;
 use App\Models\Product\Category;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,7 +29,6 @@ class Attribute extends Model
         return $this->hasMany(SelectableAttributeOption::class);
     }
 
-
     /**
      * Create Attribute options from a simple array and attach them to the attribute
      *
@@ -41,5 +41,13 @@ class Attribute extends Model
         }, $options_array);
 
         $this->attributeOptions()->saveMany($options);
+    }
+
+    public function partialPanel()
+    {
+        /** @var AttributeTypeInterface $attrType */
+        $attrType = resolve($this->attributeType->class);
+
+        return $attrType->partialPanel();
     }
 }

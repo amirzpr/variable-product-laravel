@@ -24,6 +24,16 @@
         </div>
 
         <div class="form-group">
+          <label for="slug">عنوان مناسب URL</label>
+          <input type="text" class="form-control ltr" id="slug" name="slug" placeholder="عنوان مناسب URL"
+                 value="{{ old('slug') }}">
+          <small id="slugHelp" class="text-muted">
+            باید فقط شامل حروف کوچک انگلیسی، اعداد و خط فاصله (-) باشد.
+          </small>
+          @include('partials._error_message', ['field' => 'slug'])
+        </div>
+
+        <div class="form-group">
           <label for="group">گروه مشخصات</label>
           <select class="custom-select" id="group" name="attribute_group_id">
             <option selected disabled>انتخاب کنید...</option>
@@ -73,6 +83,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">عنوان</th>
+          <th scope="col">عنوان مناسب URL</th>
           <th scope="col">نوع</th>
           <th scope="col">گروه مشخصات</th>
           <th scope="col">دسته بندی</th>
@@ -83,6 +94,7 @@
           <tr>
             <th scope="row">{{ $attr->id }}</th>
             <td>{{ $attr->title }}</td>
+            <td>{{ $attr->slug }}</td>
             <td>{{ $attr->attributeType->title }}</td>
             <td>{{ $attr->attributeGroup->title }}</td>
             <td>{{ $attr->attributeGroup->category->title }}</td>
