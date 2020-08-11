@@ -1,1 +1,1 @@
-<input hidden type="checkbox" class="js-attr" data-attr_id="{!! $attrId !!}">
+<input hidden type="checkbox" class="js-attr" data-attr_id="{!! $attrId !!}" value="{!! $attr !!}">

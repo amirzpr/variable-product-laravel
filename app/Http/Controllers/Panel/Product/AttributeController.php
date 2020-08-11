@@ -31,7 +31,7 @@ class AttributeController extends Controller
         $attribute = Attribute::create($validated);
 
         if ( isset($options_array) ) {
-            $attribute->attachOptions($options_array);
+            $attribute->saveOptions($options_array);
         }
 
         return back()->with('status', 'مشخصه «'. $validated['title'] .'» با موفقیت ایجاد شد.');

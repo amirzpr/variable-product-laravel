@@ -34,20 +34,12 @@ class Attribute extends Model
      *
      * @param array $options_array an array that contains option values
      */
-    public function attachOptions($options_array)
+    public function saveOptions($options_array)
     {
         $options = array_map( function ($option) {
             return AttributeOption::make(['value' => trim($option)]);
         }, $options_array);
 
         $this->attributeOptions()->saveMany($options);
-    }
-
-    public function partialPanel()
-    {
-        /** @var AttributeTypeInterface $attrType */
-        $attrType = resolve($this->attributeType->class);
-
-        return $attrType->partialPanel();
     }
 }
