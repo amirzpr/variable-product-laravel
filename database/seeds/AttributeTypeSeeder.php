@@ -2,7 +2,7 @@
 
 use App\Models\Product\Attribute\AttributeType;
 use Illuminate\Database\Seeder;
-use App\Models\Product\Attribute\Type;
+use App\Models\Product\Attribute;
 
 class AttributeTypeSeeder extends Seeder
 {
@@ -16,22 +16,22 @@ class AttributeTypeSeeder extends Seeder
         $types = [
             [
             'title' => 'چک باکس',
-            'class' => Type\Boolean::class,
+            'class' => Attribute\BooleanAttributeValue::class,
             'partial_panel' => 'partials.attr_type._boolean',
             ],
             [
             'title' => 'متن',
-            'class' => Type\Text::class,
+            'class' => Attribute\TextAttributeValue::class,
             'partial_panel' => 'partials.attr_type._text',
             ],
             [
             'title' => 'انتخاب تکی',
-            'class' => Type\Selectable::class,
+            'class' => Attribute\SelectableAttributeValue::class,
             'partial_panel' => 'partials.attr_type._selectable',
             ],
             [
             'title' => 'انتخاب چندتایی',
-            'class' => Type\MultiSelectable::class,
+            'class' => Attribute\MultiSelectableAttributeValue::class,
             'partial_panel' => 'partials.attr_type._multi_selectable',
             ],
         ];

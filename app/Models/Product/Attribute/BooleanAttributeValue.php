@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 /**
 * @mixin \Eloquent
 */
-class SelectableAttributeOption extends Model
+class BooleanAttributeValue extends Model
 {
+    protected $table = 'boolean_attribute_values';
     protected $guarded = [];
+    protected $casts = ['value' => 'boolean'];
     public $timestamps = false;
 
-    public function attribute()
+    public function product()
     {
-        return $this->belongsTo(Attribute::class);
+        return $this->belongsTo(Product::class);
     }
 }

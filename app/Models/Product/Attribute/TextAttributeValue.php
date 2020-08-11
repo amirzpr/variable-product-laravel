@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\Product\Attribute\Type;
+namespace App\Models\Product\Attribute;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
 * @mixin \Eloquent
 */
-class Boolean extends Model
+class TextAttributeValue extends Model
 {
-    protected $table = 'boolean_attribute_values';
+    protected $table = 'text_attribute_values';
     protected $guarded = [];
     public $timestamps = false;
 }

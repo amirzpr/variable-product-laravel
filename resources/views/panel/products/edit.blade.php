@@ -66,14 +66,24 @@
               <div class="card-body">
                 @foreach($group->attributes as $attr)
                   <div class="row mx-0 mb-3">
-                    <div class="col-3 attr-title-js-marker">
+                    <div class="col-3 js-attr-title">
                       <div class="row">
-                        <input type="checkbox" class="attribute-toggle">
-                        <h6 class="mr-2">{{ $attr->title }}</h6>
+                        @if( $attr->attributeType->class == App\Models\Product\Attribute\BooleanAttributeValue::class )
+                          <label class="pointer user-select-none">
+                            <input type="checkbox" class="js-attribute-toggle">
+                            <span class="h6 mr-2">{{ $attr->title }}</span>
+                          </label>
+                        @else
+                            <h6 class="pointer js-attribute-toggle user-select-none">
+                              <span class="font-weight-bolder ml-2">+</span>
+                              {{ $attr->title }}
+                            </h6>
+                        @endif
                       </div>
                     </div>
                     <div class="col-9">
-                      @include($attr->attributeType->partial_panel, ['slug' => $attr->slug, 'options' => $attr->attributeOptions])
+                      @include($attr->attributeType->partial_panel,
+                               ['attrId' => $attr->id, 'options' => $attr->attributeOptions])
                     </div>
                   </div>
                 @endforeach
@@ -87,17 +97,6 @@
 @endsection
 
 @push('scripts')
-  <script>
-      $(document).ready(function () {
-          $('.attribute-toggle').change(function () {
-              let value_input = $(this).closest('.attr-title-js-marker').next();
-
-              if ($(this).prop('checked')) {
-                  value_input.show()
-              } else {
-                  value_input.hide()
-              }
-          }).trigger('change')
-      })
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="{!! asset('js/attributes.js') !!}"></script>
 @endpush

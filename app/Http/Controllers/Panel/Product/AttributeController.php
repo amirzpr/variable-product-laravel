@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttribute;
 use App\Models\Product\Attribute\Attribute;
 use App\Models\Product\Attribute\AttributeType;
-use App\Models\Product\Attribute\SelectableAttributeOption;
 use App\Models\Product\Category;
 
 class AttributeController extends Controller

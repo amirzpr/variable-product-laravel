@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Product\Attribute\Type;
+namespace App\Models\Product\Attribute;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
 * @mixin \Eloquent
 */
-class Selectable extends Model
+class SelectableAttributeValue extends Model
 {
     protected $table = 'selectable_attribute_values';
     protected $guarded = [];

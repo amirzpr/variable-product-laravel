@@ -18,6 +18,8 @@ class CreateTextAttributeValuesTable extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
             $table->text('value');
+
+            $table->unique(['product_id', 'attribute_id']);
         });
     }
 
@@ -28,6 +30,6 @@ class CreateTextAttributeValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_product');
+        Schema::dropIfExists('text_attribute_values');
     }
 }

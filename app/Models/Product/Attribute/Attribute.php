@@ -26,7 +26,7 @@ class Attribute extends Model
 
     public function attributeOptions()
     {
-        return $this->hasMany(SelectableAttributeOption::class);
+        return $this->hasMany(AttributeOption::class);
     }
 
     /**
@@ -37,7 +37,7 @@ class Attribute extends Model
     public function attachOptions($options_array)
     {
         $options = array_map( function ($option) {
-            return SelectableAttributeOption::make(['value' => trim($option)]);
+            return AttributeOption::make(['value' => trim($option)]);
         }, $options_array);
 
         $this->attributeOptions()->saveMany($options);

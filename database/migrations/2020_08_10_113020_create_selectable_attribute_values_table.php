@@ -16,7 +16,9 @@ class CreateSelectableAttributeValuesTable extends Migration
         Schema::create('selectable_attribute_values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('value')->constrained('selectable_attribute_options')->cascadeOnDelete();
+            $table->foreignId('option_id')->constrained('attribute_options')->cascadeOnDelete();
+
+            $table->unique(['product_id', 'option_id']);
         });
     }
 
@@ -27,6 +29,6 @@ class CreateSelectableAttributeValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_product');
+        Schema::dropIfExists('selectable_attribute_values');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Product;
 
 use App\Models\Product\Attribute\Attribute;
+use App\Models\Product\Attribute\BooleanAttributeValue;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -21,5 +22,10 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function booleanAttributeValues()
+    {
+        return $this->hasMany(BooleanAttributeValue::class);
     }
 }
