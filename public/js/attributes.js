@@ -30,7 +30,6 @@ $(document).ready(function () {
     $('.js-attr select').change(function () {
         axios.post(window.location.href.replace('edit', 'attrs/select'), {
             option_id: $(this).val(),
-            attribute_id: this.dataset.attr_id,
         })
             .then( response => {
                 console.log(response);
@@ -42,7 +41,15 @@ $(document).ready(function () {
 
     // submit multi-selection attribute value with ajax
     $('.js-attr-multi span.btn').click(function () {
-        console.log('multi-selectable')
+        axios.post(window.location.href.replace('edit', 'attrs/multi-select'), {
+            options: $(this).parent().next().val(),
+        })
+            .then( response => {
+                console.log(response);
+            })
+            .catch( error => {
+                console.log(error);
+            });
     });
 
     // submit text attribute value with ajax

@@ -2,6 +2,7 @@
 
 namespace App\Models\Product\Attribute;
 
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,7 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 */
 class MultiSelectableAttributeValue extends Model
 {
-    protected $table = 'selectable_attribute_values';
     protected $guarded = [];
     public $timestamps = false;
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

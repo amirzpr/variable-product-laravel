@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 */
 class SelectableAttributeValue extends Model
 {
-    protected $table = 'selectable_attribute_values';
     protected $guarded = [];
     public $timestamps = false;
 

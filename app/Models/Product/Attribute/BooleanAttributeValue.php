@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 */
 class BooleanAttributeValue extends Model
 {
-    protected $table = 'boolean_attribute_values';
     protected $guarded = [];
     protected $casts = ['value' => 'boolean'];
     public $timestamps = false;

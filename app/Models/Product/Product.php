@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use App\Models\Product\Attribute\Attribute;
 use App\Models\Product\Attribute\BooleanAttributeValue;
+use App\Models\Product\Attribute\MultiSelectableAttributeValue;
 use App\Models\Product\Attribute\SelectableAttributeValue;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,5 +34,11 @@ class Product extends Model
     public function selectableAttributeValues()
     {
         return $this->hasMany(SelectableAttributeValue::class);
+    }
+
+    public function multiSelectableAttributeValues()
+    {
+        return $this->belongsToMany(MultiSelectableAttributeValue::class, 'multi_selectable_attribute_values',
+            'product_id', 'option_id');
     }
 }

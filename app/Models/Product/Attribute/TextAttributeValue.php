@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 */
 class TextAttributeValue extends Model
 {
-    protected $table = 'text_attribute_values';
     protected $guarded = [];
     public $timestamps = false;
 }
