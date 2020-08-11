@@ -30,6 +30,7 @@ $(document).ready(function () {
     $('.js-attr select').change(function () {
         axios.post(window.location.href.replace('edit', 'attrs/select'), {
             option_id: $(this).val(),
+            attribute_id: $(this).data('attr_id'),
         })
             .then( response => {
                 console.log(response);

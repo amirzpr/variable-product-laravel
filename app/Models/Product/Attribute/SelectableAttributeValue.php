@@ -17,4 +17,14 @@ class SelectableAttributeValue extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
+
+    public function attributeOption()
+    {
+        return $this->belongsTo(AttributeOption::class, 'option_id');
+    }
 }
