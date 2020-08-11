@@ -6,6 +6,7 @@ use App\Models\Product\Attribute\Attribute;
 use App\Models\Product\Attribute\BooleanAttributeValue;
 use App\Models\Product\Attribute\MultiSelectableAttributeValue;
 use App\Models\Product\Attribute\SelectableAttributeValue;
+use App\Models\Product\Attribute\TextAttributeValue;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -40,5 +41,10 @@ class Product extends Model
     {
         return $this->belongsToMany(MultiSelectableAttributeValue::class, 'multi_selectable_attribute_values',
             'product_id', 'option_id');
+    }
+
+    public function textAttributeValues()
+    {
+        return $this->hasMany(TextAttributeValue::class);
     }
 }

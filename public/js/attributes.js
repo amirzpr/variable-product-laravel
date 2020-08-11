@@ -16,7 +16,7 @@ $(document).ready(function () {
     $('input.js-attr:checkbox').change(function () {
         axios.post(window.location.href.replace('edit', 'attrs/bool'), {
             value: this.checked,
-            attribute_id: this.dataset.attr_id,
+            attribute_id: $(this).data('attr_id'),
         })
             .then( response => {
                 console.log(response);
@@ -54,6 +54,16 @@ $(document).ready(function () {
 
     // submit text attribute value with ajax
     $('.js-attr-text span.btn').click(function () {
-        console.log('text')
+        axios.post(window.location.href.replace('edit', 'attrs/text'), {
+            value: $(this).parent().next().val(),
+            attribute_id: $(this).parent().next().data('attr_id'),
+        })
+            .then( response => {
+                console.log(response);
+            })
+            .catch( error => {
+                console.log(error);
+                alert(error.response.data.message);
+            });
     });
 });
