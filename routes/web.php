@@ -10,5 +10,6 @@ Route::prefix('panel')->group(function (){
     Route::resource('attr-groups', 'Panel\Product\AttributeGroupController', ['only' => ['index','store']]);
     Route::resource('attrs', 'Panel\Product\AttributeController', ['only' => ['index','store']]);
     Route::post('products/{product}/attrs/bool', 'Panel\Product\BooleanAttributeController');
+    Route::post('products/{product}/attrs/select', 'Panel\Product\SelectableAttributeController');
 });
 

@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use App\Models\Product\Attribute\Attribute;
 use App\Models\Product\Attribute\BooleanAttributeValue;
+use App\Models\Product\Attribute\SelectableAttributeValue;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,5 +28,10 @@ class Product extends Model
     public function booleanAttributeValues()
     {
         return $this->hasMany(BooleanAttributeValue::class);
+    }
+
+    public function selectableAttributeValues()
+    {
+        return $this->hasMany(SelectableAttributeValue::class);
     }
 }

@@ -28,7 +28,16 @@ $(document).ready(function () {
 
     // submit selectable attribute value with ajax
     $('.js-attr select').change(function () {
-        console.log('selectable')
+        axios.post(window.location.href.replace('edit', 'attrs/select'), {
+            option_id: $(this).val(),
+            attribute_id: this.dataset.attr_id,
+        })
+            .then( response => {
+                console.log(response);
+            })
+            .catch( error => {
+                console.log(error);
+            });
     });
 
     // submit multi-selection attribute value with ajax
