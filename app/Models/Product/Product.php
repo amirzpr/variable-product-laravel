@@ -59,6 +59,6 @@ class Product extends Model
             $this->textAttributeValues,
             $this->selectableAttributeValues,
             $this->multiSelectableAttributeValues,
-        ])->flatten();
+        ])->collapse();
     }
 }

@@ -1,14 +1,42 @@
-$(document).ready(function () {
+$(document).ready( function () {
+    // fill inputs with previously set attribute values
+    axios.get(window.location.href.replace('edit', 'attrs'))
+        .then( response => {
+            // boolean values
+            $('input:checkbox[data-attr_id]').each( function () {
+                $(this).prop('checked', response.data[$(this).data('attr_id')][0]);
+
+                $(this).closest('.js-attr-container').find('input:checkbox.js-attribute-toggle')
+                    .prop('checked', this.checked);
+            });
+
+            // text values
+            $('textarea[data-attr_id]').each( function () {
+                $(this).val(response.data[$(this).data('attr_id')][0]);
+            });
+
+            // single selection values
+            $('select:not([multiple])[data-attr_id]').each( function () {
+                $(this).val(response.data[$(this).data('attr_id')][0]);
+            });
+
+            // multi selection values
+            $('select[multiple][data-attr_id]').each( function () {
+                $(this).val(response.data[$(this).data('attr_id')]);
+            });
+    });
+
+
     // toggle attribute input group with click
     $('h6.js-attribute-toggle').click(function () {
-        $(this).closest('.js-attr-title').next().slideToggle()
+        $(this).closest('.js-attr-container').children('.js-attr-input').slideToggle()
     }).trigger('click');
 
     // change boolean attribute hidden checkbox value
     $('input:checkbox.js-attribute-toggle').change(function () {
-        let value_input_group = $(this).closest('.js-attr-title').next();
+        let value_input_group = $(this).closest('.js-attr-container');
 
-        value_input_group.find('input:checkbox').prop('checked', this.checked).trigger('change');
+        value_input_group.find('input:checkbox[hidden]').prop('checked', this.checked).trigger('change');
     });
 
 

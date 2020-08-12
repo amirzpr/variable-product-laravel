@@ -65,7 +65,7 @@
                  data-parent="#accordion" data-group-id="{!! $group->id !!}">
               <div class="card-body">
                 @foreach($group->attributes as $attr)
-                  <div class="row mx-0 mb-3">
+                  <div class="row mx-0 mb-3 js-attr-container">
                     <div class="col-3 js-attr-title">
                       <div class="row">
                         @if( $attr->attributeType->class == App\Models\Product\Attribute\BooleanAttributeValue::class )
@@ -81,7 +81,7 @@
                         @endif
                       </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-9 js-attr-input">
                       @include($attr->attributeType->partial_panel,
                                ['attrId' => $attr->id, 'options' => $attr->attributeOptions])
                     </div>
