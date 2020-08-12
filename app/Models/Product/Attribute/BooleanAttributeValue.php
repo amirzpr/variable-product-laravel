@@ -18,4 +18,9 @@ class BooleanAttributeValue extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }

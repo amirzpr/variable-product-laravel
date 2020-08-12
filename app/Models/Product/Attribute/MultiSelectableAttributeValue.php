@@ -17,4 +17,9 @@ class MultiSelectableAttributeValue extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }

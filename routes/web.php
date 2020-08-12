@@ -16,3 +16,5 @@ Route::prefix('panel')->group(function (){
     Route::post('products/{product}/attrs/text', 'Panel\Product\TextAttributeController');
 });
 
+Route::resource('product', 'ProductController', ['only' => ['index','show']]);
+
