@@ -3,28 +3,20 @@
 namespace App\Models\Product\Attribute;
 
 use App\Models\Product\Product;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
-/**
-* @mixin \Eloquent
-*/
-class SelectableAttributeValue extends Model
+class SelectableAttributeValue extends AttributeValue
 {
-    protected $guarded = [];
-    public $timestamps = false;
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function attribute()
-    {
-        return $this->belongsTo(Attribute::class);
-    }
-
     public function attributeOption()
     {
         return $this->belongsTo(AttributeOption::class, 'option_id');
+    }
+
+    public function saveValue(Product $product, Request $request)
+    {
+        self::updateOrCreate(
+            ['attribute_id' => $request['attribute_id'], 'product_id' => $product->id],
+            ['option_id' => $request['value']]
+        );
     }
 }

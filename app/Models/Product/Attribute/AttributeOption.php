@@ -2,7 +2,6 @@
 
 namespace App\Models\Product\Attribute;
 
-use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 
 /**

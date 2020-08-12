@@ -14,10 +14,11 @@ class CreateMultiSelectableAttributeValuesTable extends Migration
     public function up()
     {
         Schema::create('multi_selectable_attribute_values', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('option_id')->constrained('attribute_options')->cascadeOnDelete();
 
-            $table->primary(['product_id', 'option_id']);
+            $table->unique(['product_id', 'option_id']);
         });
     }
 

@@ -42,7 +42,7 @@ $(document).ready( function () {
 
     // submit boolean attribute value with ajax
     $('input.js-attr:checkbox').change(function () {
-        axios.post(window.location.href.replace('edit', 'attrs/bool'), {
+        axios.post(window.location.href.replace('edit', 'attrs'), {
             value: this.checked,
             attribute_id: $(this).data('attr_id'),
         })
@@ -56,8 +56,8 @@ $(document).ready( function () {
 
     // submit selectable attribute value with ajax
     $('.js-attr select').change(function () {
-        axios.post(window.location.href.replace('edit', 'attrs/select'), {
-            option_id: $(this).val(),
+        axios.post(window.location.href.replace('edit', 'attrs'), {
+            value: $(this).val(),
             attribute_id: $(this).data('attr_id'),
         })
             .then( response => {
@@ -70,8 +70,9 @@ $(document).ready( function () {
 
     // submit multi-selection attribute value with ajax
     $('.js-attr-multi span.btn').click(function () {
-        axios.post(window.location.href.replace('edit', 'attrs/multi-select'), {
-            options: $(this).parent().next().val(),
+        axios.post(window.location.href.replace('edit', 'attrs'), {
+            value: $(this).parent().next().val(),
+            attribute_id: $(this).parent().next().data('attr_id'),
         })
             .then( response => {
                 console.log(response);
@@ -83,7 +84,7 @@ $(document).ready( function () {
 
     // submit text attribute value with ajax
     $('.js-attr-text span.btn').click(function () {
-        axios.post(window.location.href.replace('edit', 'attrs/text'), {
+        axios.post(window.location.href.replace('edit', 'attrs'), {
             value: $(this).parent().next().val(),
             attribute_id: $(this).parent().next().data('attr_id'),
         })

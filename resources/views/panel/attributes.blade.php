@@ -83,9 +83,9 @@
           <tr>
             <th scope="row">{{ $attr->id }}</th>
             <td>{{ $attr->title }}</td>
-            <td>{{ $attr->attributeType->title }}</td>
-            <td>{{ $attr->attributeGroup->title }}</td>
-            <td>{{ $attr->attributeGroup->category->title }}</td>
+            <td>{{ $attr->type->title }}</td>
+            <td>{{ $attr->group->title }}</td>
+            <td>{{ $attr->group->category->title }}</td>
           </tr>
         @endforeach
         </tbody>

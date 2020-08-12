@@ -17,22 +17,22 @@ class AttributeTypeSeeder extends Seeder
             [
             'title' => 'چک باکس',
             'class' => Attribute\BooleanAttributeValue::class,
-            'partial_panel' => 'partials.attr_type._boolean',
+            'partial' => 'partials.attribute._boolean',
             ],
             [
             'title' => 'متن',
             'class' => Attribute\TextAttributeValue::class,
-            'partial_panel' => 'partials.attr_type._text',
+            'partial' => 'partials.attribute._text',
             ],
             [
             'title' => 'انتخاب تکی',
             'class' => Attribute\SelectableAttributeValue::class,
-            'partial_panel' => 'partials.attr_type._selectable',
+            'partial' => 'partials.attribute._select',
             ],
             [
             'title' => 'انتخاب چندتایی',
             'class' => Attribute\MultiSelectableAttributeValue::class,
-            'partial_panel' => 'partials.attr_type._multi_selectable',
+            'partial' => 'partials.attribute._multi',
             ],
         ];
 

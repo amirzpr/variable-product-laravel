@@ -3,23 +3,17 @@
 namespace App\Models\Product\Attribute;
 
 use App\Models\Product\Product;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
-/**
-* @mixin \Eloquent
-*/
-class MultiSelectableAttributeValue extends Model
+class MultiSelectableAttributeValue extends AttributeValue
 {
-    protected $guarded = [];
-    public $timestamps = false;
-
     public function products()
     {
         return $this->belongsToMany(Product::class);
     }
 
-    public function attribute()
+    public function saveValue(Product $product, Request $request)
     {
-        return $this->belongsTo(Attribute::class);
+        $product->multiSelectableAttributeValues()->sync($request['value']);
     }
 }

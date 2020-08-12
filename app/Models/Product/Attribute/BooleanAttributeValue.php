@@ -3,24 +3,17 @@
 namespace App\Models\Product\Attribute;
 
 use App\Models\Product\Product;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
-/**
-* @mixin \Eloquent
-*/
-class BooleanAttributeValue extends Model
+class BooleanAttributeValue extends AttributeValue
 {
-    protected $guarded = [];
     protected $casts = ['value' => 'boolean'];
-    public $timestamps = false;
 
-    public function product()
+    public function saveValue(Product $product, Request $request)
     {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function attribute()
-    {
-        return $this->belongsTo(Attribute::class);
+        self::updateOrCreate(
+            ['attribute_id' => $request['attribute_id'], 'product_id' => $product->id],
+            ['value' => (bool) $request['value']]
+        );
     }
 }

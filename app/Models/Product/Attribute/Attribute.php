@@ -2,11 +2,10 @@
 
 namespace App\Models\Product\Attribute;
 
-use App\Contracts\AttributeTypeInterface;
-use App\Models\Product\Category;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property AttributeType type
 * @mixin \Eloquent
 */
 class Attribute extends Model
@@ -14,14 +13,14 @@ class Attribute extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function attributeGroup()
+    public function group()
     {
-        return $this->belongsTo(AttributeGroup::class);
+        return $this->belongsTo(AttributeGroup::class, 'attribute_group_id');
     }
 
-    public function attributeType()
+    public function type()
     {
-        return $this->belongsTo(AttributeType::class);
+        return $this->belongsTo(AttributeType::class, 'attribute_type_id');
     }
 
     public function attributeOptions()

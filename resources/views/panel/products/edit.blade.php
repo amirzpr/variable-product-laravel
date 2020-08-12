@@ -68,7 +68,7 @@
                   <div class="row mx-0 mb-3 js-attr-container">
                     <div class="col-3 js-attr-title">
                       <div class="row">
-                        @if( $attr->attributeType->class == App\Models\Product\Attribute\BooleanAttributeValue::class )
+                        @if( $attr->type->class == App\Models\Product\Attribute\BooleanAttributeValue::class )
                           <label class="pointer user-select-none">
                             <input type="checkbox" class="js-attribute-toggle">
                             <span class="h6 mr-2">{{ $attr->title }}</span>
@@ -82,8 +82,7 @@
                       </div>
                     </div>
                     <div class="col-9 js-attr-input">
-                      @include($attr->attributeType->partial_panel,
-                               ['attrId' => $attr->id, 'options' => $attr->attributeOptions])
+                      @include( $attr->type->partial, ['attrId' => $attr->id, 'options' => $attr->attributeOptions])
                     </div>
                   </div>
                 @endforeach
