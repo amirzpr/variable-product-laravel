@@ -19,7 +19,7 @@ class CreateAttributesTable extends Migration
             $table->foreignId('attribute_group_id')->constrained();
             $table->unsignedBigInteger('attribute_type_id');
 
-            $table->unique(['slug', 'attribute_group_id']);
+            $table->unique(['title', 'attribute_group_id']);
         });
     }
 
