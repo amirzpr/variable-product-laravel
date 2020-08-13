@@ -24,5 +24,10 @@ abstract class AttributeValue extends Model
         return $this->belongsTo(Attribute::class);
     }
 
+    public function price()
+    {
+        return $this->morphOne(AttributeValuePrice::class, 'priceable');
+    }
+
     abstract public function saveValue(Product $product, Request $request);
 }
