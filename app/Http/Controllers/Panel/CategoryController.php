@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Product;
+namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('panel.categories', [
-            'categories' => Category::all(),
+            'categories' => Category::with('parent')->get(),
         ]);
     }
 

@@ -7,13 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 /**
 * @mixin \Eloquent
 */
-class AttributeOption extends Model
+class AttributeBooleanValue extends Model
 {
     protected $guarded = [];
     public $timestamps = false;
+    protected $primaryKey = 'product_attribute_id';
+    protected $casts = ['value' => 'boolean'];
 
     public function attribute()
     {
         return $this->belongsTo(Attribute::class);
+    }
+
+    public function productAttribute()
+    {
+        return $this->belongsTo(ProductAttribute::class);
     }
 }

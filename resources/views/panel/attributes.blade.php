@@ -13,7 +13,7 @@
   <hr class="mt-1">
   <div class="row justify-content-around">
     <div class="col-md-3 p-3 rounded" style="background-color: #eee">
-      <form action="{!! route('attrs.store') !!}" method="post">
+      <form action="{!! route('attributes.store') !!}" method="post">
         @csrf
 
         <div class="form-group">
@@ -45,7 +45,7 @@
           <select class="custom-select" id="type" name="attribute_type_id">
             <option selected disabled>انتخاب کنید...</option>
             @foreach($attrTypes as $type)
-              <option value="{{ $type->id }}">{{ $type->title }}</option>
+              <option value="{{ $type->id }}">{{ $type->label }}</option>
             @endforeach
           </select>
           @include('partials._error_message', ['field' => 'attribute_type_id'])
@@ -83,7 +83,7 @@
           <tr>
             <th scope="row">{{ $attr->id }}</th>
             <td>{{ $attr->title }}</td>
-            <td>{{ $attr->type->title }}</td>
+            <td>{{ $attr->type->label }}</td>
             <td>{{ $attr->group->title }}</td>
             <td>{{ $attr->group->category->title }}</td>
           </tr>
@@ -98,7 +98,7 @@
   <script>
       $(document).ready(function () {
           $('#type').change(function (e) {
-              if ( e.target.value === '3' || e.target.value === '4' ) {
+              if ( e.target.value === '3' ) {
                   $('#options-div').show()
               } else {
                   $('#options-div').hide()

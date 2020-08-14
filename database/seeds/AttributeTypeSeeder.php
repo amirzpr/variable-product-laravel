@@ -15,24 +15,19 @@ class AttributeTypeSeeder extends Seeder
     {
         $types = [
             [
-            'title' => 'چک باکس',
-            'class' => Attribute\BooleanAttributeValue::class,
+            'name' => 'boolean',
+            'label' => 'چک باکس',
             'partial' => 'partials.attribute._boolean',
             ],
             [
-            'title' => 'متن',
-            'class' => Attribute\TextAttributeValue::class,
+            'name' => 'text',
+            'label' => 'متن',
             'partial' => 'partials.attribute._text',
             ],
             [
-            'title' => 'انتخاب تکی',
-            'class' => Attribute\SelectableAttributeValue::class,
+            'name' => 'single_select',
+            'label' => 'انتخابی',
             'partial' => 'partials.attribute._select',
-            ],
-            [
-            'title' => 'انتخاب چندتایی',
-            'class' => Attribute\MultiSelectableAttributeValue::class,
-            'partial' => 'partials.attribute._multi',
             ],
         ];
 

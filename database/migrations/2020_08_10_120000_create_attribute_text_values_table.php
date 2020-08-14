@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeOptionsTable extends Migration
+class CreateAttributeTextValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateAttributeOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_options', function (Blueprint $table) {
-            $table->id();
-            $table->string('value');
-            $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
+        Schema::create('attribute_text_values', function (Blueprint $table) {
+            $table->foreignId('product_attribute_id')->constrained()->cascadeOnDelete();
+            $table->text('value');
+
+            $table->primary('product_attribute_id');
         });
     }
 
@@ -27,6 +28,6 @@ class CreateAttributeOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_options');
+        Schema::dropIfExists('attribute_text_values');
     }
 }

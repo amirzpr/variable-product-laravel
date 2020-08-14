@@ -1,4 +1,4 @@
-<div class="input-group flex-row-reverse js-attr-text">
+<div class="input-group flex-row-reverse js-attr">
   <div class="input-group-prepend">
     <span class="input-group-text text-success font-weight-bolder btn btn-success">✔</span>
   </div>

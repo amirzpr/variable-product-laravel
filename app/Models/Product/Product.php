@@ -2,15 +2,16 @@
 
 namespace App\Models\Product;
 
-use App\Models\Product\Attribute\AttributeOption;
-use App\Models\Product\Attribute\BooleanAttributeValue;
-use App\Models\Product\Attribute\TextAttributeValue;
+use App\Models\Product\Attribute\ProductAttribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * @property Category rootCategory
+ * @property Collection productAttributes
+ * @property Collection allAttributes
  * @mixin \Eloquent
-*/
+ */
 class Product extends Model
 {
     protected $guarded = [];
@@ -25,40 +26,22 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function booleanAttributeValues()
+    public function productAttributes()
     {
-        return $this->hasMany(BooleanAttributeValue::class);
-    }
-
-    public function textAttributeValues()
-    {
-        return $this->hasMany(TextAttributeValue::class);
-    }
-
-    public function selectableAttributeValues()
-    {
-        return $this->belongsToMany(AttributeOption::class, 'selectable_attribute_values',
-            'product_id', 'option_id');
-    }
-
-    public function multiSelectableAttributeValues()
-    {
-        return $this->belongsToMany(AttributeOption::class, 'multi_selectable_attribute_values',
-            'product_id', 'option_id');
+        return $this->hasMany(ProductAttribute::class);
     }
 
     /**
      * Returns values of all attribute types in one collection
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
-    public function getAllAttributeValuesAttribute()
+    public function getAllAttributesAttribute()
     {
-        return collect([
-            $this->booleanAttributeValues,
-            $this->textAttributeValues,
-            $this->selectableAttributeValues,
-            $this->multiSelectableAttributeValues,
-        ])->collapse();
+        return ProductAttribute::with([
+            'attributeBooleanValue',
+            'attributeTextValue',
+            'attributeOptionValues',
+        ])->where('product_id', $this->id)->get();
     }
 }

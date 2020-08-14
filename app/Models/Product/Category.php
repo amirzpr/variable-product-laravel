@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * @mixin \Eloquent
+ * @property Collection products
+ * @property Collection rootProducts
  * @property Collection parents
  * @property Collection allAttributeGroups
+ * @property Collection attributeGroups
+ * @mixin \Eloquent
  */
 class Category extends Model
 {
@@ -80,12 +83,9 @@ class Category extends Model
      */
     public function getAllAttributeGroupsAttribute()
     {
-        $attributeGroups = $this->attributeGroups;
+        $parent_category_ids = $this->parents->pluck('id');
+        $all_category_ids = $parent_category_ids->push($this->id);
 
-        foreach ($this->parents as $category) {
-            $attributeGroups->push($category->attributeGroups);
-        }
-
-        return $attributeGroups->flatten();
+        return AttributeGroup::with('attributes.type')->whereIn('category_id', $all_category_ids)->get();
     }
 }

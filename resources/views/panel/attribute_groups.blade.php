@@ -13,7 +13,7 @@
   <hr class="mt-1">
   <div class="row justify-content-around">
     <div class="col-md-3 p-3 rounded" style="background-color: #eee">
-      <form action="{!! route('attr-groups.store') !!}" method="post">
+      <form action="{!! route('attribute-groups.store') !!}" method="post">
         @csrf
 
         <div class="form-group">

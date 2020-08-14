@@ -66,7 +66,7 @@
             <th scope="row">{{ $category->id }}</th>
             <td>{{ $category->title }}</td>
             <td>{{ $category->slug }}</td>
-            <td>{{ $category->parent->title ?? 'ندارد' }}</td>
+            <td>{{ $category->parent->title ?? '-' }}</td>
           </tr>
         @endforeach
         </tbody>

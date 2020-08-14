@@ -14,10 +14,10 @@ class StoreProduct extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'between:2,255', 'unique:categories'],
+            'title' => ['required', 'string', 'between:2,255'],
             'slug' => ['required', 'string', 'between:2,255', 'regex:/^[a-z0-9\-]+$/', 'unique:products'],
             'price' => ['required', 'integer'],
-            'categories' => ['required'],
+            'categories' => ['required', 'array'],
             'categories.*' => ['exists:categories,id'],
             'root_category_id' => ['required', 'in_array:categories.*'],
         ];

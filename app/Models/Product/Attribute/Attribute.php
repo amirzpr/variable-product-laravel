@@ -23,22 +23,27 @@ class Attribute extends Model
         return $this->belongsTo(AttributeType::class, 'attribute_type_id');
     }
 
-    public function attributeOptions()
+    public function productAttributes()
     {
-        return $this->hasMany(AttributeOption::class);
+        return $this->hasMany(ProductAttribute::class);
+    }
+
+    public function attributeOptionValues()
+    {
+        return $this->hasMany(AttributeOptionValue::class);
     }
 
     /**
-     * Create Attribute options from a simple array and attach them to the attribute
+     * Create attribute option values from a simple array and attach them to the attribute
      *
      * @param array $options_array an array that contains option values
      */
-    public function saveOptions($options_array)
+    public function saveOptionValues($options_array)
     {
         $options = array_map( function ($option) {
-            return AttributeOption::make(['value' => trim($option)]);
+            return AttributeOptionValue::make(['value' => trim($option)]);
         }, $options_array);
 
-        $this->attributeOptions()->saveMany($options);
+        $this->attributeOptionValues()->saveMany($options);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeValuePricesTable extends Migration
+class CreateProductAttributePricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAttributeValuePricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_value_prices', function (Blueprint $table) {
-            $table->id();
+        Schema::create('product_attribute_prices', function (Blueprint $table) {
+            $table->foreignId('product_attribute_id')->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('price');
-            $table->unsignedBigInteger('priceable_id');
-            $table->string('priceable_type');
+
+            $table->primary('product_attribute_id');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateAttributeValuePricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_value_prices');
+        Schema::dropIfExists('product_attribute_prices');
     }
 }

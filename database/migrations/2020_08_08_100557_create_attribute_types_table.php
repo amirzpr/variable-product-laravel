@@ -15,8 +15,8 @@ class CreateAttributeTypesTable extends Migration
     {
         Schema::create('attribute_types', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('class');
+            $table->string('name');
+            $table->string('label');
             $table->string('partial');
         });
     }

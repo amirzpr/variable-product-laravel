@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('panel')->group(function (){
     Route::get('/', function() { return view('layouts.panel'); } )->name('panel.dashboard');
-    Route::resource('categories', 'Panel\Product\CategoryController', ['only' => ['index', 'store']]);
-    Route::resource('products', 'Panel\Product\ProductController', ['except' => ['create', 'destroy','show']]);
-    Route::resource('attr-groups', 'Panel\Product\AttributeGroupController', ['only' => ['index','store']]);
-    Route::resource('attrs', 'Panel\Product\AttributeController', ['only' => ['index','store']]);
-    Route::get('products/{product}/attrs', 'Panel\Product\ProductAttributeController@show');
-    Route::post('products/{product}/attrs', 'Panel\Product\ProductAttributeController@store');
+    Route::resource('categories', 'Panel\CategoryController', ['only' => ['index', 'store']]);
+    Route::resource('products', 'Panel\ProductController', ['except' => ['create', 'destroy','show']]);
+    Route::resource('attribute-groups', 'Panel\AttributeGroupController', ['only' => ['index','store']]);
+    Route::resource('attributes', 'Panel\AttributeController', ['only' => ['index','store']]);
+    Route::get('products/{product}/attributes', 'Panel\ProductAttributeController@show');
+    Route::post('products/{product}/attributes', 'Panel\ProductAttributeController@store');
 });
 
 Route::resource('product', 'ProductController', ['only' => ['index','show']]);

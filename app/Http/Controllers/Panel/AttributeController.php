@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Product;
+namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttribute;
@@ -31,7 +31,7 @@ class AttributeController extends Controller
         $attribute = Attribute::create($validated);
 
         if ( isset($options_array) ) {
-            $attribute->saveOptions($options_array);
+            $attribute->saveOptionValues($options_array);
         }
 
         return back()->with('status', 'مشخصه «'. $validated['title'] .'» با موفقیت ایجاد شد.');

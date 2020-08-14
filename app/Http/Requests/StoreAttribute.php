@@ -31,7 +31,7 @@ class StoreAttribute extends FormRequest
                 "unique:attributes,title,null,id,attribute_group_id,{$this['attribute_group_id']}"
             ],
             'options' => [
-                'exclude_unless:attribute_type_id,3,4',
+                'exclude_unless:attribute_type_id,3',
                 'required',
             ],
         ];
