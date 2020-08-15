@@ -16,6 +16,7 @@ class CreateAttributeBooleanValuesTable extends Migration
         Schema::create('attribute_boolean_values', function (Blueprint $table) {
             $table->foreignId('product_attribute_id')->constrained()->cascadeOnDelete();
             $table->boolean('value');
+            $table->unsignedBigInteger('price')->nullable();
 
             $table->primary('product_attribute_id');
         });

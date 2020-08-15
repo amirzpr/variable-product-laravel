@@ -41,7 +41,7 @@ class ProductAttribute extends Model
 
     public function attributeOptionValues()
     {
-        return $this->belongsToMany(AttributeOptionValue::class, 'product_option');
+        return $this->belongsToMany(AttributeOptionValue::class, 'product_option')->withPivot('price');
     }
 
 
@@ -58,7 +58,7 @@ class ProductAttribute extends Model
             case 'text':
                 return $this->attributeTextValue->value;
             case 'select':
-                return $this->attributeOptionValues->pluck('value')->toArray();
+                return $this->attributeOptionValues->pluck('value', 'id')->toArray();
         }
     }
 
@@ -85,10 +85,4 @@ class ProductAttribute extends Model
             $this->attributeTextValue()->updateOrCreate(['value' => $value]);
         }
     }
-
-    public function price()
-    {
-        return $this->hasOne(ProductAttributePrice::class);
-    }
-
 }

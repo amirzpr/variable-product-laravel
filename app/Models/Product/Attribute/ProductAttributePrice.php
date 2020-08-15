@@ -17,4 +17,9 @@ class ProductAttributePrice extends Model
     {
         return $this->belongsTo(ProductAttribute::class);
     }
+
+    public function attributeValue()
+    {
+        return $this->morphTo();
+    }
 }

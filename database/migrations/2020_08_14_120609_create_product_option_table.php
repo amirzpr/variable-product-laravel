@@ -16,6 +16,7 @@ class CreateProductOptionTable extends Migration
         Schema::create('product_option', function (Blueprint $table) {
             $table->foreignId('product_attribute_id')->constrained()->cascadeOnDelete();
             $table->foreignId('attribute_option_value_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('price')->nullable();
 
             $table->primary(['product_attribute_id', 'attribute_option_value_id'], 'product_option_primary');
         });

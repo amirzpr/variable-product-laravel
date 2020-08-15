@@ -9,9 +9,12 @@ Route::prefix('panel')->group(function (){
     Route::resource('products', 'Panel\ProductController', ['except' => ['create', 'destroy','show']]);
     Route::resource('attribute-groups', 'Panel\AttributeGroupController', ['only' => ['index','store']]);
     Route::resource('attributes', 'Panel\AttributeController', ['only' => ['index','store']]);
+
     Route::get('products/{product}/attributes', 'Panel\ProductAttributeController@show');
     Route::post('products/{product}/attributes', 'Panel\ProductAttributeController@store');
+
+    Route::get('products/{product}/variations', 'Panel\ProductVariationController@show');
+    Route::post('products/{product}/variations', 'Panel\ProductVariationController@store');
 });
 
 Route::resource('product', 'ProductController', ['only' => ['index','show']]);
-

@@ -1,3 +1,62 @@
+function fetchVariations() {
+    axios.get(window.location.href.replace('edit', 'variations'))
+        .then( response => {
+            document.querySelector('#variations').innerHTML = response.data;
+        })
+        .then( () => {
+            // disable or enable input fields based on checkbox value
+            $('#variations input:checkbox').change(function () {
+                let group = $(this).closest('.js-variation-group');
+
+                // enable checkbox its text input children contain value
+                if ( group.find('input[type=number]').filter( (index, element) => element.value.length > 0 ).length > 0 ) {
+                    this.checked = true
+                }
+
+                group.find('input[type=number],button:submit').prop('disabled', ! this.checked);
+            }).trigger('change');
+
+
+            // submit boolean value price on button click
+            $('#variations button.js-boolean-submit').click(function (event) {
+                event.preventDefault();
+
+                let price_input = $(this).parent().find('input[type=number]');
+
+                axios.post(window.location.href.replace('edit', 'variations'), {
+                    product_attribute_id: price_input.data('product-attribute-id'),
+                    price: price_input.val(),
+                })
+                    .then( response => console.log(response) )
+                    .catch( error => console.log(error) )
+            });
+
+            // submit option value prices on button click
+            $('#variations button.js-options-submit').click(function (event) {
+                event.preventDefault();
+
+                let product_attribute_id = this.id;
+                let price_inputs = $(this).closest('.js-variation-group').find('input[type=number]');
+
+                let prices = [];
+                price_inputs.each(function () {
+                    prices.push({
+                        option_id: $(this).data('option-id'),
+                        price: $(this).val(),
+                    })
+                });
+
+                axios.post(window.location.href.replace('edit', 'variations'), {
+                    product_attribute_id: product_attribute_id,
+                    prices: prices,
+                })
+                    .then( response => console.log(response) )
+                    .catch( error => console.log(error) )
+            });
+
+        })
+}
+
 $(document).ready(function () {
     // fill inputs with previously set attribute values
     axios.get(window.location.href.replace('edit', 'attributes'))
@@ -7,13 +66,20 @@ $(document).ready(function () {
             data.forEach( ([attribute_id, value]) => {
                 let valuedInput = $(`[data-attr_id=${attribute_id}]`);
 
-                if (typeof value == 'boolean') {
-                    valuedInput.prop('checked', value);
-                    valuedInput.closest('.js-attr-container').find('input:checkbox.js-attribute-toggle')
-                        .prop('checked', value);
-                }
+                switch (typeof value) {
+                    case "boolean":
+                        valuedInput.prop('checked', value);
+                        valuedInput.closest('.js-attr-container').find('input:checkbox.js-attribute-toggle')
+                            .prop('checked', value);
+                        break;
 
-                valuedInput.val(value)
+                    case "object":
+                        valuedInput.val(Object.keys(value));
+                        break;
+
+                    default:
+                        valuedInput.val(value)
+                }
             });
     });
 
@@ -37,12 +103,8 @@ $(document).ready(function () {
             value: Boolean(this.checked),
             attribute_id: $(this).data('attr_id'),
         })
-            .then( response => {
-                console.log(response);
-            })
-            .catch( error => {
-                console.log(error);
-            });
+            .then( response => console.log(response) )
+            .catch( error => console.log(error) )
     });
 
     // submit text and option attribute values with ajax
@@ -51,11 +113,13 @@ $(document).ready(function () {
             value: $(this).parent().next().val(),
             attribute_id: $(this).parent().next().data('attr_id'),
         })
-            .then( response => {
-                console.log(response);
-            })
-            .catch( error => {
-                console.log(error);
-            });
+            .then( response => console.log(response) )
+            .catch( error => console.log(error) )
+    });
+
+
+    // variations tab click listener
+    $('#variations-tab').click( function () {
+        fetchVariations()
     });
 });

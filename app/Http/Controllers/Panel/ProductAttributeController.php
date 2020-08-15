@@ -17,16 +17,8 @@ class ProductAttributeController extends Controller
      */
     public function show(Product $product)
     {
-        return response()->json($product->allAttributes->mapWithKeys(function ($item) {
-            if ($item['attributeBooleanValue']) {
-                return [$item['attribute_id'] => $item['attributeBooleanValue']['value']];
-            }
-            if ($item['attributeTextValue']) {
-                return [$item['attribute_id'] => $item['attributeTextValue']['value']];
-            }
-            if ($item['attributeOptionValues']) {
-                return [$item['attribute_id'] => $item['attributeOptionValues']->pluck('id')];
-            }
+        return response()->json($product->allProductAttributes->mapWithKeys(function ($item) {
+            return [$item->attribute_id => $item->value];
         }));
     }
 

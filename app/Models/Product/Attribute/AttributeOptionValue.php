@@ -14,6 +14,6 @@ class AttributeOptionValue extends Model
 
     public function productAttributes()
     {
-        return $this->belongsToMany(ProductAttribute::class, 'product_option');
+        return $this->belongsToMany(ProductAttribute::class, 'product_option')->withPivot('price');
     }
 }

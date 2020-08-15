@@ -15,7 +15,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $attrValues = $product->allAttributes->mapWithKeys( function ($productAttribute) {
+        $attrValues = $product->allProductAttributes->mapWithKeys( function ($productAttribute) {
             return [ $productAttribute->attribute->title => (array) $productAttribute->value ];
         });
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 /**
  * @property Category rootCategory
  * @property Collection productAttributes
- * @property Collection allAttributes
+ * @property Collection allProductAttributes
  * @mixin \Eloquent
  */
 class Product extends Model
@@ -36,7 +36,7 @@ class Product extends Model
      *
      * @return Collection
      */
-    public function getAllAttributesAttribute()
+    public function getAllProductAttributesAttribute()
     {
         return ProductAttribute::with([
             'attributeBooleanValue',

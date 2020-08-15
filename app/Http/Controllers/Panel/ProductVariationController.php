@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Http\Controllers\Panel;
+
+use App\Http\Controllers\Controller;
+use App\Models\Product\Attribute\ProductAttribute;
+use App\Models\Product\Product;
+use Illuminate\Http\Request;
+
+class ProductVariationController extends Controller
+{
+    /**
+     * Return partial view loaded with available variations
+     *
+     * @param  Product  $product
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Product $product)
+    {
+        return view('partials.attribute._variations', [
+            'productAttributes' => $product->allProductAttributes,
+        ]);
+    }
+
+    /**
+     * Store variation prices
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $product_attribute = ProductAttribute::find($request['product_attribute_id']);
+
+        if ( $request->has('prices') )
+        {
+            foreach ($request['prices'] as ['option_id' => $option_id, 'price' => $price])
+            {
+                $product_attribute->attributeOptionValues()
+                    ->updateExistingPivot($option_id, ['price' => $price], false);
+            }
+
+            return response('successful');
+        }
+
+        $product_attribute->attributeBooleanValue()->update([
+            'price' => $request['price']
+        ]);
+
+        return response('successful');
+    }
+}
