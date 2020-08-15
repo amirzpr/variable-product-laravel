@@ -25,7 +25,7 @@ class AttributeTypeSeeder extends Seeder
             'partial' => 'partials.attribute._text',
             ],
             [
-            'name' => 'single_select',
+            'name' => 'select',
             'label' => 'انتخابی',
             'partial' => 'partials.attribute._select',
             ],

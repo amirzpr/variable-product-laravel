@@ -53,11 +53,11 @@ class ProductAttribute extends Model
     public function getValueAttribute()
     {
         switch ($this->attribute->type->name) {
-            case 'boolean':
+            case AttributeType::boolean:
                 return $this->attributeBooleanValue->value;
-            case 'text':
+            case AttributeType::text:
                 return $this->attributeTextValue->value;
-            case 'select':
+            case AttributeType::select:
                 return $this->attributeOptionValues->pluck('value', 'id')->toArray();
         }
     }

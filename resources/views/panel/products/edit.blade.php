@@ -81,7 +81,7 @@
                       <div class="row mx-0 mb-3 js-attr-container">
                         <div class="col-3 js-attr-title">
                           <div class="row">
-                            @if( $attr->type->name == 'boolean' )
+                            @if( $attr->type->name == \App\Models\Product\Attribute\AttributeType::boolean )
                               <label class="pointer user-select-none">
                                 <input type="checkbox" class="js-attribute-toggle">
                                 <span class="h6 mr-2">{{ $attr->title }}</span>

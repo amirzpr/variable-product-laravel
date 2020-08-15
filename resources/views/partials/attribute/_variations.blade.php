@@ -1,5 +1,5 @@
 @foreach( $productAttributes as $productAttr )
-  @if( $productAttr->attribute->type->name == 'boolean' )
+  @if( $productAttr->attribute->type->name == \App\Models\Product\Attribute\AttributeType::boolean )
     <div class="border p-3 my-3 js-variation-group">
       <form class="form-inline my-2">
         <div class="custom-control custom-checkbox ml-3">
@@ -18,7 +18,7 @@
         <button type="submit" class="btn btn-primary mr-auto js-boolean-submit">ثبت</button>
       </form>
     </div>
-  @elseif( $productAttr->attribute->type->name == 'select' )
+  @elseif( $productAttr->attribute->type->name == \App\Models\Product\Attribute\AttributeType::select )
     <div class="border p-3 my-3 js-variation-group">
       <div class="form-inline">
         <div class="custom-control custom-checkbox ml-3">
