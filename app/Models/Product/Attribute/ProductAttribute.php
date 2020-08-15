@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 /**
  * @property Attribute attribute
- * @property mixed value
+ * @property Collection values
  * @property AttributeTextValue attributeTextValue
  * @property AttributeBooleanValue attributeBooleanValue
  * @property Collection attributeOptionValues
@@ -46,19 +46,19 @@ class ProductAttribute extends Model
 
 
     /**
-     * Return context-based attribute value of the product
+     * Return context-based attribute values of the product
      *
      * @return mixed
      */
-    public function getValueAttribute()
+    public function getValuesAttribute()
     {
         switch ($this->attribute->type->name) {
             case AttributeType::boolean:
-                return $this->attributeBooleanValue->value;
+                return collect([$this->attributeBooleanValue]);
             case AttributeType::text:
-                return $this->attributeTextValue->value;
+                return collect([$this->attributeTextValue]);
             case AttributeType::select:
-                return $this->attributeOptionValues->pluck('value', 'id')->toArray();
+                return $this->attributeOptionValues;
         }
     }
 

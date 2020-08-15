@@ -39,7 +39,7 @@ class ProductController extends Controller
 
         $product->categories()->sync($categories);
 
-        return redirect()->route('products.edit', $product)
+        return redirect()->route('panel.products.edit', $product)
             ->with('status', "محصول « {$validated['title']} » با موفقیت ایجاد شد. اکنون می‌توانید ویژگی‌های محصول را اضافه کنید.");
     }
 

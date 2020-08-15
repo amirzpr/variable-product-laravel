@@ -17,9 +17,19 @@ class ProductAttributeController extends Controller
      */
     public function show(Product $product)
     {
-        return response()->json($product->allProductAttributes->mapWithKeys(function ($item) {
-            return [$item->attribute_id => $item->value];
-        }));
+        $attribute_values = $product->allProductAttributes
+        ->mapWithKeys(
+            function ($product_attribute) {
+                return [$product_attribute->attribute_id => $product_attribute->values->pluck('value', 'id')];
+            }
+        )
+        ->map(
+            function ($item) {
+                return isset($item['']) ? $item[''] : $item;
+            }
+        );
+
+        return response()->json($attribute_values);
     }
 
     /**
