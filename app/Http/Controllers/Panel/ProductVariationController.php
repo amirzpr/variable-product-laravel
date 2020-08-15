@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreVariation;
 use App\Models\Product\Attribute\ProductAttribute;
 use App\Models\Product\Product;
-use Illuminate\Http\Request;
 
 class ProductVariationController extends Controller
 {
@@ -25,10 +25,10 @@ class ProductVariationController extends Controller
     /**
      * Store variation prices
      *
-     * @param  Request  $request
+     * @param  StoreVariation  $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreVariation $request)
     {
         $product_attribute = ProductAttribute::find($request['product_attribute_id']);
 
