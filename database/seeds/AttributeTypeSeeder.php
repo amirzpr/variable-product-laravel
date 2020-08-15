@@ -15,17 +15,17 @@ class AttributeTypeSeeder extends Seeder
     {
         $types = [
             [
-            'name' => 'boolean',
+            'name' => AttributeType::boolean,
             'label' => 'چک باکس',
             'partial' => 'partials.attribute._boolean',
             ],
             [
-            'name' => 'text',
+            'name' => AttributeType::text,
             'label' => 'متن',
             'partial' => 'partials.attribute._text',
             ],
             [
-            'name' => 'select',
+            'name' => AttributeType::select,
             'label' => 'انتخابی',
             'partial' => 'partials.attribute._select',
             ],
