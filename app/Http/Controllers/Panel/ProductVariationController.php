@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVariation;
 use App\Models\Product\Attribute\ProductAttribute;
 use App\Models\Product\Product;
+use Illuminate\Http\Request;
 
 class ProductVariationController extends Controller
 {
@@ -25,26 +26,41 @@ class ProductVariationController extends Controller
     /**
      * Store variation prices
      *
+     * @param  ProductAttribute  $productAttribute
      * @param  StoreVariation  $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function store(StoreVariation $request)
+    public function store(ProductAttribute $productAttribute, StoreVariation $request)
     {
-        $product_attribute = ProductAttribute::find($request['product_attribute_id']);
-
         if ( $request->has('prices') )
         {
             foreach ($request['prices'] as ['option_id' => $option_id, 'price' => $price])
             {
-                $product_attribute->attributeOptionValues()
+                $productAttribute->attributeOptionValues()
                     ->updateExistingPivot($option_id, ['price' => $price], false);
             }
 
             return response('successful');
         }
 
-        $product_attribute->attributeBooleanValue()->update([
+        $productAttribute->attributeBooleanValue()->update([
             'price' => $request['price']
+        ]);
+
+        return response('successful');
+    }
+
+    /**
+     * Update "is_variable" field of product attribute
+     *
+     * @param  ProductAttribute  $productAttribute
+     * @param  Request  $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function update(ProductAttribute $productAttribute, Request $request)
+    {
+        $productAttribute->update([
+            'is_variable' => $request['is_variable'] ?: null
         ]);
 
         return response('successful');

@@ -17,6 +17,7 @@ class CreateProductAttributesTable extends Migration
             $table->id();
             $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->boolean('is_variable')->nullable();
 
             $table->unique(['attribute_id', 'product_id']);
         });

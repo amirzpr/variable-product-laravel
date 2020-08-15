@@ -18,6 +18,7 @@ class ProductAttribute extends Model
 {
     protected $guarded = [];
     public $timestamps = false;
+    protected $casts = ['is_variable' => 'boolean'];
 
     public function product()
     {

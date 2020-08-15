@@ -4,7 +4,7 @@
       <form class="form-inline my-2">
         <div class="custom-control custom-checkbox ml-3">
           <input type="checkbox" class="custom-control-input" id="{{ $productAttr->id }}"
-                 @if($productAttr->attributeBooleanValue->price) checked @endif>
+                 @if($productAttr->is_variable) checked @endif>
           <label class="custom-control-label" for="{{ $productAttr->id }}"></label>
         </div>
         <div class="form-group" style="min-width: 200px">
@@ -22,7 +22,8 @@
     <div class="border p-3 my-3 js-variation-group">
       <div class="form-inline">
         <div class="custom-control custom-checkbox ml-3">
-          <input type="checkbox" class="custom-control-input" id="{{ $productAttr->id }}">
+          <input type="checkbox" class="custom-control-input" id="{{ $productAttr->id }}"
+                 @if($productAttr->is_variable) checked @endif>
           <label class="custom-control-label" for="{{ $productAttr->id }}"></label>
         </div>
         <h6 class="mb-0">{{ $productAttr->attribute->title }}</h6>

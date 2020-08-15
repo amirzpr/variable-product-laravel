@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Product\Attribute\AttributeType;
-use App\Models\Product\Attribute\ProductAttribute;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreVariation extends FormRequest
 {
@@ -17,22 +14,13 @@ class StoreVariation extends FormRequest
     public function rules()
     {
         return [
-            'product_attribute_id' => [
-                'required',
-                'integer',
-                'exists:product_attributes,id'
-            ],
             'price' => [
                 'integer',
-                Rule::requiredIf(function () {
-                    return ProductAttribute::find($this['product_attribute_id'])->attribute->type->name == AttributeType::boolean;
-                })
+                'required_without:prices'
             ],
             'prices' => [
                 'array',
-                Rule::requiredIf(function () {
-                    return ProductAttribute::find($this['product_attribute_id'])->attribute->type->name == AttributeType::select;
-                })
+                'required_without:price'
             ],
         ];
     }

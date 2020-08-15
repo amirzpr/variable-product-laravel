@@ -4,15 +4,17 @@ function fetchVariations() {
             document.querySelector('#variations').innerHTML = response.data;
         })
         .then( () => {
-            // disable or enable input fields based on checkbox value
             $('#variations input:checkbox').change(function () {
                 let group = $(this).closest('.js-variation-group');
 
-                // enable checkbox its text input children contain value
-                if ( group.find('input[type=number]').filter( (index, element) => element.value.length > 0 ).length > 0 ) {
-                    this.checked = true
-                }
+                // update "is_variable" field of product attribute based on checkbox
+                axios.put(window.location.href.replace(/\d+\/edit/, `variations/${this.id}`), {
+                    'is_variable': Boolean(this.checked)
+                })
+                    .then( response => console.log(response) )
+                    .catch( error => console.log(error) );
 
+                // disable or enable input fields based on checkbox value
                 group.find('input[type=number],button:submit').prop('disabled', ! this.checked);
             }).trigger('change');
 
@@ -22,9 +24,9 @@ function fetchVariations() {
                 event.preventDefault();
 
                 let price_input = $(this).parent().find('input[type=number]');
+                let product_attribute_id = price_input.data('product-attribute-id');
 
-                axios.post(window.location.href.replace('edit', 'variations'), {
-                    product_attribute_id: price_input.data('product-attribute-id'),
+                axios.post(window.location.href.replace(/\d+\/edit/, `variations/${product_attribute_id}`), {
                     price: price_input.val(),
                 })
                     .then( response => console.log(response) )
@@ -46,8 +48,7 @@ function fetchVariations() {
                     })
                 });
 
-                axios.post(window.location.href.replace('edit', 'variations'), {
-                    product_attribute_id: product_attribute_id,
+                axios.post(window.location.href.replace(/\d+\/edit/, `variations/${product_attribute_id}`), {
                     prices: prices,
                 })
                     .then( response => console.log(response) )
