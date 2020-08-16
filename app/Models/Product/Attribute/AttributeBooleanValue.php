@@ -14,11 +14,6 @@ class AttributeBooleanValue extends Model
     protected $primaryKey = 'product_attribute_id';
     protected $casts = ['value' => 'boolean'];
 
-    public function attribute()
-    {
-        return $this->belongsTo(Attribute::class);
-    }
-
     public function productAttribute()
     {
         return $this->belongsTo(ProductAttribute::class);

@@ -26,10 +26,19 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $attrValues = $product->allProductAttributes->mapWithKeys( function ($product_attribute) {
-            return [ $product_attribute->attribute->title => $product_attribute->values->pluck('value') ];
+        $productAttributes = $product->allProductAttributes;
+
+        $attrValues = $productAttributes->mapWithKeys(function ($product_attribute) {
+            return [$product_attribute->attribute->title => $product_attribute->values->pluck('value')];
         });
 
-        return view('products.show', compact('product','attrValues'));
+        $variations = $productAttributes->filter(function ($item) {
+            return $item->is_variable;
+        })
+            ->mapWithKeys(function ($product_attribute) {
+                return [$product_attribute->attribute->title => $product_attribute->values];
+            });
+
+        return view('products.show', compact('product', 'attrValues', 'variations'));
     }
 }
